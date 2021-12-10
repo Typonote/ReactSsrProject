@@ -69,7 +69,7 @@ module.exports = {
   swSrc: resolveModule(resolveApp, "src/service-worker"),
   publicUrlOrPath,
   ssrIndexJs: resolveApp("src/index.server.js"),
-  sssrBuild: resolveApp("dist"),
+  ssrBuild: resolveApp("dist"),
 };
 
 module.exports.moduleFileExtensions = moduleFileExtensions;
