@@ -9,7 +9,8 @@ const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
 
-const env = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
+const publicUrl = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
+const env = getClientEnvironment(publicUrl);
 
 module.exports = {
   mode: "production",
@@ -35,14 +36,6 @@ module.exports = {
               customize: require.resolve(
                 "babel-preset-react-app/webpack-overrides"
               ),
-              presets: [
-                [
-                  require.resolve("babel-preset-react-app"),
-                  {
-                    runtime: "automatic",
-                  },
-                ],
-              ],
               plugins: [
                 [
                   require.resolve("babel-plugin-named-asset-import"),
@@ -149,11 +142,7 @@ module.exports = {
   resolve: {
     modules: ["node_modules"],
   },
-  externals: [
-    nodeExternals({
-      allowlist: [/@babel/],
-    }),
-  ],
+  externals: [nodeExternals()],
   plugins: [
     new webpack.DefinePlugin(env.stringified), // 환경변수를 주입해줍니다.
   ],
